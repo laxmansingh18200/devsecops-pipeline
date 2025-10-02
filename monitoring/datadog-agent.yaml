@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog-agent
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: datadog-agent
+  template:
+    metadata:
+      labels:
+        app: datadog-agent
+    spec:
+      serviceAccountName: datadog-agent
+      containers:
+        - name: agent
+          image: datadog/agent:7
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: datadog-secret
+                  key: api-key
+            - name: DD_SITE
+              value: datadoghq.com
+            - name: DD_LOGS_ENABLED
+              value: "true"
+            - name: DD_APM_ENABLED
+              value: "true"
+          volumeMounts:
+            - name: dockersocket
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: dockersocket
+          hostPath:
+            path: /var/run/docker.sock

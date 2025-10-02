@@ -1,0 +1,16 @@
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  site: datadoghq.com
+  logs:
+    enabled: true
+    containerCollectAll: true
+  apm:
+    enabled: true
+  processAgent:
+    enabled: true
+  kubeStateMetricsEnabled: true
+
+agents:
+  image:
+    name: "gcr.io/datadoghq/agent"
+    tag: "7"

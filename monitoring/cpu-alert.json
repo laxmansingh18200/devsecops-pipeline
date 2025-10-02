@@ -1,0 +1,17 @@
+{
+  "name": "High CPU Usage on Pods",
+  "type": "query alert",
+  "query": "avg(last_5m):avg:kubernetes.cpu.usage.total{*} by {pod_name} > 80",
+  "message": "Pod {{pod_name.name}} CPU usage > 80% for 5 minutes.",
+  "tags": ["kubernetes", "cpu", "alert"],
+  "options": {
+    "notify_audit": false,
+    "locked": false,
+    "timeout_h": 0,
+    "new_host_delay": 300,
+    "require_full_window": true,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 300
+  }
+}
