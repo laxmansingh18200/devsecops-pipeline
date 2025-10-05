@@ -9,6 +9,7 @@ COPY . .
 
 # Stage 2: runtime (non-root)
 FROM node:18-alpine3.21
+RUN rm -rf /usr/local/lib/node_modules
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /app
