@@ -38,9 +38,9 @@ jobs:
         run: |
           docker build --no-cache -t ${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} .
 
-      - name: Check installed cross-spawn version inside container
-        run: |
-          docker run --rm -it docker.io/${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} sh -c 'cat /usr/local/lib/node_modules/npm/node_modules/cross-spawn/package.json | grep version'
+      # - name: Check installed cross-spawn version inside container
+      #   run: |
+      #     docker run --rm -it docker.io/${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} sh -c 'cat /usr/local/lib/node_modules/npm/node_modules/cross-spawn/package.json | grep version'
   
       - name: Install Trivy
         run: |
