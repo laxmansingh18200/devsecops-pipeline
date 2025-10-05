@@ -36,7 +36,7 @@ jobs:
   
       - name: Build image
         run: |
-          docker build -t ${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} .
+          docker build --no-cache -t ${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} .
   
       - name: Install Trivy
         run: |
