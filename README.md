@@ -35,13 +35,13 @@ I followed a step-by-step DevSecOps pipeline:
    - Assumed AWS account with IAM roles exists.
    - Plan for **tfsec/checkov** integration for IaC scanning.
 
-6. **Monitoring & Logging (Requirement #6)**
+6. **Monitoring & Logging**
    - Added **Datadog agent** for Kubernetes monitoring (metrics, logs, APM).
    - Alternative: Prometheus + Grafana stack.
    - Log collection centralized (stdout/stderr to Datadog or ELK).
    - Health endpoint `/health` for liveness probes.
 
-7. **Compliance & Security Baselines (Requirement #7)**
+7. **Compliance & Security Baselines**
    - Followed **CIS Benchmarks for Docker & Kubernetes**:
      - Non-root containers
      - Resource requests/limits
@@ -50,7 +50,7 @@ I followed a step-by-step DevSecOps pipeline:
    - Pipeline gates ensure CVEs are blocked before production.
    - Future: OPA/Gatekeeper to enforce security policies at admission level.
 
-8. **Audit Logging (Requirement #8)**
+8. **Audit Logging**
    - Blue/Green or Canary Deployment:
    - Use Kubernetes Deployment strategies:
    strategy:
@@ -89,9 +89,8 @@ I followed a step-by-step DevSecOps pipeline:
 ### 1. Clone the repo & Run App Locally with Docker Compose
 docker compose up --build
 Visit: http://localhost:3000
-
 Expected response:
-{"message":"Hello from secure Node.js app"}
+<img width="924" height="284" alt="image" src="https://github.com/user-attachments/assets/c8afc86b-1f5c-4552-8d09-76e2790f5982" />
 
 ### 2. Build Image & Scan
 docker build -t secure-node:local .
@@ -106,3 +105,10 @@ kubectl get pods -n secure-app
 
 Access API (if using minikube):
 minikube service api-svc -n secure-app
+<img width="1912" height="456" alt="image" src="https://github.com/user-attachments/assets/a7c7947a-7388-4ead-bdeb-10b6dc2c8aca" />
+<img width="1278" height="89" alt="image" src="https://github.com/user-attachments/assets/34c5b4f6-39ca-4725-a0c0-a691d9a875c4" />
+
+GitHub Actions Pipeline is also successsful:
+<img width="1659" height="508" alt="image" src="https://github.com/user-attachments/assets/5954e92a-f771-43ca-8dfd-785132f9a3f0" />
+
+
