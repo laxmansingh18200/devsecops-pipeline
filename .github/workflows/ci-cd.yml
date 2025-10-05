@@ -40,7 +40,7 @@ jobs:
 
       - name: Check installed cross-spawn version inside container
         run: |
-          docker run --rm ${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} sh -c "cat node_modules/cross-spawn/package.json | grep version"
+          docker run --rm -it docker.io/${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }} sh -c 'cat /usr/local/lib/node_modules/npm/node_modules/cross-spawn/package.json | grep version'
   
       - name: Install Trivy
         run: |
@@ -48,7 +48,7 @@ jobs:
   
       - name: Run Trivy image scan
         run: |
-          trivy image --severity CRITICAL,HIGH --exit-code 1 docker.io/${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }}
+          trivy image --debug --severity CRITICAL,HIGH --exit-code 1 docker.io/${{ github.repository }}:${{ github.ref_name }}-${{ github.sha }}
 
       - name: Push to GHCR (only if scans passed)
         if: success()
